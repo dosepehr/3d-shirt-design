@@ -1,4 +1,10 @@
-import { Center, Environment, useGLTF } from '@react-three/drei';
+import {
+    Center,
+    Decal,
+    Environment,
+    useGLTF,
+    useTexture,
+} from '@react-three/drei';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
@@ -8,6 +14,7 @@ const Shirt = () => {
     const snap = useSnapshot(state);
     const { nodes, materials } = useGLTF('/model/shirt_baked.glb');
     const group = useRef();
+    const texture = useTexture(`./images/${snap.selectedDecal}.png`);
 
     useFrame((state, delta) => {
         easing.dampE(
@@ -31,8 +38,14 @@ const Shirt = () => {
                         receiveShadow
                         geometry={nodes.T_Shirt_male.geometry}
                         material={materials.lambert1}
-                    />
-                    {/* <Shadows /> */}
+                    >
+                        <Decal
+                            position={[0, 0.04, 0.15]}
+                            rotation={[0, 0, 0]}
+                            scale={0.15}
+                            map={texture}
+                        />
+                    </mesh>
                 </Center>
             </group>
         </>

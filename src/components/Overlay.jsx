@@ -66,6 +66,9 @@ function Customizer() {
                                 <img
                                     src={`./images/${decal}.png`}
                                     alt='brand'
+                                    onClick={() =>
+                                        (state.selectedDecal = decal)
+                                    }
                                 />
                             </div>
                         ))}
