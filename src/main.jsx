@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import './index.css';
 import { Canvas } from '@react-three/fiber';
 import Shirt from './components/Shirt';
+import Overlay from './components/Overlay';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
         >
             <Shirt />
         </Canvas>
-        <App />
+        <Overlay />
     </StrictMode>
 );
 

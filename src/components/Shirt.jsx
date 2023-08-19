@@ -30,7 +30,7 @@ const Shirt = () => {
                         geometry={nodes.T_Shirt_male.geometry}
                         material={materials.lambert1}
                     />
-                    <Shadows />
+                    {/* <Shadows /> */}
                 </Center>
             </group>
         </>
