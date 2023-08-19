@@ -17,6 +17,12 @@ const Shirt = () => {
     const texture = useTexture(`./images/${snap.selectedDecal}.png`);
 
     useFrame((state, delta) => {
+        easing.damp3(
+            state.camera.position,
+            [snap.intro ? -state.viewport.width / 2 : -0.8, 0, 2],
+            0.25,
+            delta
+        );
         easing.dampE(
             group.current.rotation,
             [state.pointer.y / 10, -state.pointer.x / 5, 0],

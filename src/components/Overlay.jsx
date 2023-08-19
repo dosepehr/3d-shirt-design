@@ -1,23 +1,46 @@
 import { useSnapshot } from 'valtio';
 import { state } from '../store/store.js';
-
+import { motion, AnimatePresence } from 'framer-motion';
 export default function Overlay() {
     const { intro } = useSnapshot(state);
+    const transition = { type: 'spring', duration: 0.8 };
 
+    const config = {
+        initial: {
+            x: -100,
+            opacity: 0,
+            transition: { ...transition, delay: 0.5 },
+        },
+        animate: { x: 0, opacity: 1, transition: { ...transition, delay: 0 } },
+        exit: { x: -100, opacity: 0, transition: { ...transition, delay: 0 } },
+    };
     return (
         <div className='container'>
-            <header>
+            <motion.header
+                initial={{
+                    opacity: 0,
+                    y: -120,
+                }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: 'spring', duration: 1.8, delay: 1 }}
+            >
                 <img src='./images/stylish-tshirt.png' alt='' />
-            </header>
+            </motion.header>
 
-            {intro ? <Intro /> : <Customizer />}
+            <AnimatePresence>
+                {intro ? (
+                    <Intro key='main' config={config} />
+                ) : (
+                    <Customizer key='custom' config={config} />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
 
-function Intro() {
+function Intro({ config }) {
     return (
-        <section key='main'>
+        <motion.section key='main' {...config}>
             <div className='section--container'>
                 <div>
                     <h1>LET'S DO IT.</h1>
@@ -39,11 +62,11 @@ function Intro() {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
 
-function Customizer() {
+function Customizer({ config }) {
     const downloadImg = () => {
         const link = document.createElement('a');
         link.setAttribute('download', 'canvas.png');
@@ -59,7 +82,7 @@ function Customizer() {
     const { colors, decals, selectedColor } = useSnapshot(state);
 
     return (
-        <section key='custom'>
+        <motion.section key='custom' {...config}>
             <div className='customizer'>
                 <div className='color-options'>
                     {colors.map((color) => (
@@ -101,6 +124,6 @@ function Customizer() {
                     GO BACK
                 </button>
             </div>
-        </section>
+        </motion.section>
     );
 }
