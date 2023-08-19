@@ -2,9 +2,9 @@ import { proxy } from 'valtio';
 
 const state = proxy({
     intro: true,
-    color: '#EFBD48',
+    color: '#79E800',
     decals: ['react', 'threejs', 'logo-tshirt'],
-    selectedDecal: 'ai',
+    selectedDecal: 'threejs',
 });
 
 export { state };
