@@ -44,6 +44,18 @@ function Intro() {
 }
 
 function Customizer() {
+    const downloadImg = () => {
+        const link = document.createElement('a');
+        link.setAttribute('download', 'canvas.png');
+        link.setAttribute(
+            'href',
+            document
+                .querySelector('canvas')
+                .toDataURL('image/png')
+                .replace('image/png', 'image/octet-stream')
+        );
+        link.click();
+    };
     const { colors, decals, selectedColor } = useSnapshot(state);
 
     return (
@@ -74,7 +86,11 @@ function Customizer() {
                         ))}
                     </div>
                 </div>
-                <button className='share' style={{ background: selectedColor }}>
+                <button
+                    onClick={downloadImg}
+                    className='share'
+                    style={{ background: selectedColor }}
+                >
                     DOWNLOAD
                 </button>
                 <button

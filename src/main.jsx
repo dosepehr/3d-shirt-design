@@ -8,6 +8,7 @@ import Overlay from './components/Overlay';
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Canvas
+            gl={{ preserveDrawingBuffer: true }}
             eventSource={document.getElementById('root')}
             eventPrefix='client'
             camera={{
@@ -20,4 +21,3 @@ createRoot(document.getElementById('root')).render(
         <Overlay />
     </StrictMode>
 );
-
