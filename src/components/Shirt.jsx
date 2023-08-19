@@ -1,20 +1,22 @@
-import { Environment, useGLTF } from '@react-three/drei';
+import { Center, Environment, useGLTF } from '@react-three/drei';
+import Shadows from './Shadows';
 
-const Shirt = (props) => {
+const Shirt = () => {
     const { nodes, materials } = useGLTF('/model/shirt_baked.glb');
     return (
         <>
             <ambientLight intensity={0.5} />
             <Environment preset='city' />
 
-            <group {...props} dispose={null}>
+            <Center>
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.T_Shirt_male.geometry}
                     material={materials.lambert1}
                 />
-            </group>
+                <Shadows />
+            </Center>
         </>
     );
 };
