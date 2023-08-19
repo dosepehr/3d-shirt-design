@@ -29,7 +29,7 @@ const Shirt = () => {
             0.25,
             delta
         );
-        easing.dampC(materials.lambert1.color, snap.selectedColor, 0.25, delta);
+        easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
     });
     return (
         <>

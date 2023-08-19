@@ -160,8 +160,9 @@ button:hover {
     position: absolute;
     display: flex;
     gap: 10px;
-    bottom: 20px;
+    bottom: 25%;
     margin-bottom: 20px;
+    right: 40px;
 }
 
 .circle {

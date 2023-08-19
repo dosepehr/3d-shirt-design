@@ -1,6 +1,7 @@
 import { useSnapshot } from 'valtio';
 import { state } from '../store/store.js';
 import { motion, AnimatePresence } from 'framer-motion';
+import ColorPicker from './ColorPicker.jsx';
 export default function Overlay() {
     const { intro } = useSnapshot(state);
     const transition = { type: 'spring', duration: 0.8 };
@@ -79,20 +80,13 @@ function Customizer({ config }) {
         );
         link.click();
     };
-    const { colors, decals, selectedColor } = useSnapshot(state);
+    const { decals, color } = useSnapshot(state);
 
     return (
         <motion.section key='custom' {...config}>
             <div className='customizer'>
                 <div className='color-options'>
-                    {colors.map((color) => (
-                        <div
-                            key={color}
-                            className='circle'
-                            style={{ background: color }}
-                            onClick={() => (state.selectedColor = color)}
-                        ></div>
-                    ))}
+                    <ColorPicker />
                 </div>
                 <div className='decals'>
                     <div className='decals--container'>
@@ -112,13 +106,13 @@ function Customizer({ config }) {
                 <button
                     onClick={downloadImg}
                     className='share'
-                    style={{ background: selectedColor }}
+                    style={{ background: color }}
                 >
                     DOWNLOAD
                 </button>
                 <button
                     className='exit'
-                    style={{ background: selectedColor }}
+                    style={{ background: color }}
                     onClick={() => (state.intro = true)}
                 >
                     GO BACK
