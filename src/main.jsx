@@ -4,7 +4,6 @@ import App from './App';
 import './index.css';
 import { Canvas } from '@react-three/fiber';
 import Shirt from './components/Shirt';
-import { OrbitControls } from '@react-three/drei';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -17,7 +16,6 @@ createRoot(document.getElementById('root')).render(
             }}
         >
             <Shirt />
-            <OrbitControls />
         </Canvas>
         <App />
     </StrictMode>
