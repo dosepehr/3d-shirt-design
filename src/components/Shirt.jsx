@@ -17,18 +17,29 @@ const Shirt = () => {
     const texture = useTexture(`./images/${snap.selectedDecal}.png`);
 
     useFrame((state, delta) => {
-        easing.damp3(
-            state.camera.position,
-            [snap.intro ? -state.viewport.width / 2 : -0.8, 0, 2],
-            0.25,
-            delta
-        );
+        const isBreakpoint = window.innerWidth <= 1260;
+        const isMobile = window.innerWidth <= 600;
+
+        // set the initial position of the model
+        let targetPosition = [-1.5, 0, 2];
+        if (snap.intro) {
+            if (isBreakpoint) targetPosition = [-1, 0, 2];
+            if (isMobile) targetPosition = [-1, 0.2, 2.5];
+        } else {
+            if (isMobile) targetPosition = [-1, 0, 2.5];
+            else targetPosition = [-0.8, 0, 2];
+        }
+
+        // set model camera position
+        easing.damp3(state.camera.position, targetPosition, 0.25, delta);
+
         easing.dampE(
             group.current.rotation,
             [state.pointer.y / 10, -state.pointer.x / 5, 0],
             0.25,
             delta
         );
+
         easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
     });
     return (
