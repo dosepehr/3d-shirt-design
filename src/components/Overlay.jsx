@@ -44,7 +44,7 @@ function Intro() {
 }
 
 function Customizer() {
-    const { colors, decals } = useSnapshot(state);
+    const { colors, decals, selectedColor } = useSnapshot(state);
 
     return (
         <section key='custom'>
@@ -55,6 +55,7 @@ function Customizer() {
                             key={color}
                             className='circle'
                             style={{ background: color }}
+                            onClick={() => (state.selectedColor = color)}
                         ></div>
                     ))}
                 </div>
@@ -70,12 +71,12 @@ function Customizer() {
                         ))}
                     </div>
                 </div>
-                <button className='share' style={{ background: 'black' }}>
+                <button className='share' style={{ background: selectedColor }}>
                     DOWNLOAD
                 </button>
                 <button
                     className='exit'
-                    style={{ background: 'black' }}
+                    style={{ background: selectedColor }}
                     onClick={() => (state.intro = true)}
                 >
                     GO BACK

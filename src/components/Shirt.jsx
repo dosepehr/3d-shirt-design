@@ -1,20 +1,22 @@
 import { Center, Environment, useGLTF } from '@react-three/drei';
-import Shadows from './Shadows';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { easing } from 'maath';
-
+import { state } from '../store/store.js';
+import { useSnapshot } from 'valtio';
 const Shirt = () => {
+    const snap = useSnapshot(state);
     const { nodes, materials } = useGLTF('/model/shirt_baked.glb');
     const group = useRef();
+
     useFrame((state, delta) => {
-        easing.dampE(group.current.rotation, [
-            state.pointer.y / 5,
-            -state.pointer.x / 5,
-            0,
-            0.15,
-            delta,
-        ]);
+        easing.dampE(
+            group.current.rotation,
+            [state.pointer.y / 10, -state.pointer.x / 5, 0],
+            0.25,
+            delta
+        );
+        easing.dampC(materials.lambert1.color, snap.selectedColor, 0.25, delta);
     });
     return (
         <>
